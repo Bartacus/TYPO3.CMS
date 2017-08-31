@@ -21,5 +21,9 @@ if (version_compare(PHP_VERSION, '7.0.0', '<')) {
 call_user_func(function () {
     $classLoader = require __DIR__ . '/../../../../../../vendor/autoload.php';
 
-    (new \TYPO3\CMS\Backend\Http\Application($classLoader))->run();
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initKernel();
+    $application = new \TYPO3\CMS\Backend\Http\Application($classLoader);
+
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initAppPackage();
+    $application->run();
 });
