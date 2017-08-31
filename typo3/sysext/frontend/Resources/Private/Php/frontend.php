@@ -20,5 +20,13 @@ if (version_compare(PHP_VERSION, '7.0.0', '<')) {
 // Set up the application for the Frontend
 call_user_func(function () {
     $classLoader = require __DIR__ . '/../../../../../../vendor/autoload.php';
-    (new \TYPO3\CMS\Frontend\Http\Application($classLoader))->run();
+
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initKernel();
+    $application = new \Bartacus\Bundle\BartacusBundle\Http\FrontendApplication(
+        $classLoader,
+        \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::getKernel()
+    );
+
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initAppPackage();
+    $application->run();
 });
