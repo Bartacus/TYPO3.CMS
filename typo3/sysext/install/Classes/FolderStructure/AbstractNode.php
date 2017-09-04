@@ -142,9 +142,9 @@ abstract class AbstractNode
     protected function fixPermission(): FlashMessage
     {
         if ($this->isPermissionCorrect()) {
-            throw new Exception(
-                'Permission on ' . $this->getAbsolutePath() . ' are already ok',
-                1366744035
+            return new FlashMessage(
+                '',
+                'Permission on ' . $this->getAbsolutePath() . ' are already ok'
             );
         }
         $result = @chmod($this->getAbsolutePath(), octdec($this->getTargetPermission()));
