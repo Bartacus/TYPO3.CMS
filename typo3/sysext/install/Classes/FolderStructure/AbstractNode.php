@@ -140,10 +140,10 @@ abstract class AbstractNode
     protected function fixPermission()
     {
         if ($this->isPermissionCorrect()) {
-            throw new Exception(
-                'Permission on ' . $this->getAbsolutePath() . ' are already ok',
-                1366744035
-            );
+            $status = new Status\OkStatus();
+            $status->setTitle('Permission already correct on ' . $this->getRelativePathBelowSiteRoot() . '.');
+
+            return $status;
         }
         $result = @chmod($this->getAbsolutePath(), octdec($this->getTargetPermission()));
         if ($result === true) {
