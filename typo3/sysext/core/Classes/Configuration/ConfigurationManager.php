@@ -282,7 +282,11 @@ class ConfigurationManager
     public function canWriteConfiguration()
     {
         $fileLocation = $this->getLocalConfigurationFileLocation();
-        return @is_writable(file_exists($fileLocation) ? $fileLocation : PATH_site . 'typo3conf/');
+
+        // platform.sh setup specific, check alternative writable dir
+        $writeableDir = \file_exists(PATH_site . 'typo3conf/writeable/') ? PATH_site . 'typo3conf/writeable/' : PATH_site . 'typo3conf/';
+
+        return @is_writable(file_exists($fileLocation) ? $fileLocation : $writeableDir);
     }
 
     /**
