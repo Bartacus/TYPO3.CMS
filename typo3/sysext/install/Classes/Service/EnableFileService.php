@@ -198,6 +198,15 @@ class EnableFileService
         $files = array_filter(scandir(self::$sitePath), function ($file) {
             return @is_file(self::$sitePath . $file) && preg_match('~^' . self::FIRST_INSTALL_FILE_PATH . '.*~i', $file);
         });
+
+        $files = \array_map(function ($file) {
+            if (\is_link(self::$sitePath . $file)) {
+                return \str_replace(self::$sitePath, '', \realpath(self::$sitePath . $file));
+            }
+
+            return $file;
+        }, $files);
+
         return $files;
     }
 }
