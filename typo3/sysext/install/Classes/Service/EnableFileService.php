@@ -180,7 +180,12 @@ class EnableFileService
      */
     protected static function getInstallToolEnableFilePath()
     {
-        return PATH_site . self::INSTALL_TOOL_ENABLE_FILE_PATH;
+        $originalPath = PATH_site . self::INSTALL_TOOL_ENABLE_FILE_PATH;
+        if (\is_file($originalPath) && \is_link($originalPath)) {
+            $originalPath = \realpath($originalPath);
+        }
+
+        return $originalPath;
     }
 
     /**
