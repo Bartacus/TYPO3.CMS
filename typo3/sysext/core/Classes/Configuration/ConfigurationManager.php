@@ -321,7 +321,13 @@ class ConfigurationManager
     public function canWriteConfiguration()
     {
         $fileLocation = $this->getLocalConfigurationFileLocation();
-        return @is_writable(file_exists($fileLocation) ? $fileLocation : Environment::getLegacyConfigPath() . '/');
+
+        // platform.sh setup specific, check alternative writable dir
+        $writeableDir = \file_exists(Environment::getLegacyConfigPath() . '/writeable/')
+            ? Environment::getLegacyConfigPath() . '/writeable/'
+            : Environment::getLegacyConfigPath() . '/';
+
+        return @is_writable(file_exists($fileLocation) ? $fileLocation : $writeableDir);
     }
 
     /**
