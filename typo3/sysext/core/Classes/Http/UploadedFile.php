@@ -179,14 +179,8 @@ class UploadedFile implements UploadedFileInterface
             throw new \RuntimeException('Cannot move uploaded file, as it was already moved.', 1436717308);
         }
 
-        // Check if the target path is inside the allowed paths of TYPO3, and make it absolute.
-        $targetPath = GeneralUtility::getFileAbsFileName($targetPath);
-        if (empty($targetPath)) {
-            throw new \RuntimeException('Cannot move uploaded file, as it was already moved.', 1436717309);
-        }
-
         if (!empty($this->file) && is_uploaded_file($this->file)) {
-            if (GeneralUtility::upload_copy_move($this->file, $targetPath . PathUtility::basename($this->file)) === false) {
+            if (GeneralUtility::upload_copy_move($this->file, $targetPath) === false) {
                 throw new \RuntimeException('An error occurred while moving uploaded file', 1436717310);
             }
         } elseif ($this->stream) {
