@@ -100,6 +100,7 @@ if (PHP_VERSION_ID < 70200) {
 
 call_user_func(function () {
     $classLoader = require __DIR__ . '/../../../../../../vendor/autoload.php';
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initKernel();
     \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run(1, \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_INSTALL);
     \TYPO3\CMS\Core\Core\Bootstrap::init($classLoader, true)->get(\TYPO3\CMS\Install\Http\Application::class)->run();
 });
