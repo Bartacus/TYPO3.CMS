@@ -191,6 +191,15 @@ class EnableFileService
         $files = array_filter(scandir(Environment::getPublicPath() . '/'), function ($file) {
             return @is_file(Environment::getPublicPath() . '/' . $file) && preg_match('~^' . self::FIRST_INSTALL_FILE_PATH . '.*~i', $file);
         });
+
+        $files = array_map(function ($file) {
+            if (@is_link(Environment::getPublicPath() . '/' . $file)) {
+                return str_replace(Environment::getPublicPath() . '/', '', realpath(Environment::getPublicPath() . '/' . $file));
+            }
+
+            return $file;
+        }, $files);
+
         return $files;
     }
 }
