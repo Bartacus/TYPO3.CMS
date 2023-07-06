@@ -56,7 +56,7 @@ class GeneralUtility
      *
      * @var array<class-string, SingletonInterface>
      */
-    protected static array $singletonInstances = [];
+    protected static $singletonInstances = [];
 
     /**
      * Instances returned by `makeInstance`, using the class names as array keys
