@@ -16,6 +16,8 @@
 // Set up the application for the frontend
 call_user_func(static function () {
     $classLoader = require __DIR__ . '/../../../../../../vendor/autoload.php';
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initKernel();
     \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run();
     \TYPO3\CMS\Core\Core\Bootstrap::init($classLoader)->get(\TYPO3\CMS\Core\Http\Application::class)->run();
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::terminate();
 });
