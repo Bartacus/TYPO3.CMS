@@ -57,7 +57,7 @@ class GeneralUtility
      *
      * @var array<class-string, SingletonInterface>
      */
-    protected static array $singletonInstances = [];
+    protected static $singletonInstances = [];
 
     /**
      * Instances returned by `makeInstance`, using the class names as array keys
@@ -2962,7 +2962,7 @@ class GeneralUtility
      * @internal
      * @return array<class-string, SingletonInterface>
      */
-    public static function getSingletonInstances(): array
+    public static function getSingletonInstances(): array|\Bartacus\Bundle\BartacusBundle\Typo3\MakeInstanceServiceLocator
     {
         return static::$singletonInstances;
     }
