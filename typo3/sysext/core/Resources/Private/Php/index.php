@@ -15,6 +15,7 @@
 
 call_user_func(static function () {
     $classLoader = require __DIR__ . '/../../../../../../vendor/autoload.php';
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initKernel();
     \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run();
 
     $isInstallToolDirectAccess = false;
@@ -26,8 +27,10 @@ call_user_func(static function () {
 
     if ($container->has(\TYPO3\CMS\Core\Http\Application::class)) {
         $container->get(\TYPO3\CMS\Core\Http\Application::class)->run();
+        \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::terminate();
         return;
     }
 
     $container->get(\TYPO3\CMS\Install\Http\Application::class)->run();
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::terminate();
 });
