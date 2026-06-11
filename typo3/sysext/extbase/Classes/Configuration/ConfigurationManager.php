@@ -86,7 +86,7 @@ class ConfigurationManager implements ConfigurationManagerInterface
             // Note custom extensions should typically not catch this exception. The dependency to
             // the current request is still an important dependency in most extbase places, e.g. in
             // controller and view related code.
-            throw new NoServerRequestGivenException('No request given. ConfigurationManager has not been initialized properly.', 1721920500);
+            $request = (new \TYPO3\CMS\Core\Http\ServerRequest())->withAttribute('applicationType', \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_BE);
         }
         if (ApplicationType::fromRequest($request)->isFrontend()) {
             if ($configurationType === self::CONFIGURATION_TYPE_FULL_TYPOSCRIPT) {
