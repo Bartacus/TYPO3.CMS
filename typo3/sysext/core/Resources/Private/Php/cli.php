@@ -20,6 +20,7 @@
  */
 call_user_func(static function () {
     $classLoader = require __DIR__ . '/../../../../../../vendor/autoload.php';
+    \Bartacus\Bundle\BartacusBundle\Bootstrap\SymfonyBootstrap::initKernel();
     \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::run(4, \TYPO3\CMS\Core\Core\SystemEnvironmentBuilder::REQUESTTYPE_CLI);
     \TYPO3\CMS\Core\Core\Bootstrap::init($classLoader, true)->get(\TYPO3\CMS\Core\Console\CommandApplication::class)->run();
 });
